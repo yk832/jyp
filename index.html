@@ -77,7 +77,19 @@
 				if(ts.indexOf('=') > -1){
 					ts = ts.replaceAll('=','');
 				}
-					
+
+				if(ts.indexOf('데모') > -1){
+					ts = ts.replaceAll('데모','');
+				}
+
+				if(ts.indexOf('demo') > -1){
+					ts = ts.replaceAll('demo','');
+				}
+				
+				if(ts.indexOf('prod.') > -1){
+					ts = ts.replaceAll('prod.','');
+				}
+
 				$('#tar').val(ts);
 				$('#result').html('완료'+cnt);
 			}
