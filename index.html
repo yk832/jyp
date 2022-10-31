@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title>JYP</title>
+<meta name="author" content="SK MNS" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width" />
+<link rel="icon" href="data:;base64,iVBORw0KGgo="> <!-- favicon 처리 -->
+<style>
+	#btnab{
+		width : 75px;	
+		height : 75px;
+	}
+</style>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+</head>
+	<body>
+	    <div id="wrap" class="p-msg">
+	      <!-- 본문 -->
+	      <section id="contents">
+	        <div class="inner">
+	          <div class="msg-box">
+	          	<textarea id="tar" rows="40" cols="150"></textarea>
+	          	<input type="button" id="btnab" value="확인" onclick="textFilter()">
+	          </div>
+			  <div id="result"></div>
+	        </div>
+	      </section>
+	    </div>
+	    <script type="text/javascript">
+		    $(document).ready(function(){
+				var sData = prompt("전문을 입력하세요", "");
+				if(sData == 'aaa' || sData == 'ㅁㅁㅁ' ||sData == 'AAA'){
+					$('#btnab').attr('disabled',false);
+				} else {
+					$('#btnab').attr('disabled',true);
+				}
+		    });
+			var cnt=0;
+	    
+    		function textFilter(){
+				var ts = $('#tar').val();
+				cnt++;
+				// jyp
+				if(ts.indexOf('[JYPP] ') > -1 || ts.indexOf('[JYPP]') > -1){
+					//- ts.split('[JYPP] ').join('zs');
+					ts = ts.replaceAll('[JYPP] ','');
+				}
+	
+				//mp3
+				if(ts.indexOf('.mp3') > -1){
+					ts = ts.replaceAll('.mp3','');
+				}
+	
+				// ()
+				if(ts.indexOf('(') > -1){
+					ts = ts.replaceAll('(','');
+				}
+	
+				if(ts.indexOf(')') > -1){
+					ts = ts.replaceAll(')','');
+				}
+				
+				// PROD.
+				if(ts.indexOf('PROD.') > -1){
+					ts = ts.replaceAll('PROD.','');
+				}
+				
+				if(ts.indexOf('_') > -1){
+					ts = ts.replaceAll('_','');
+				}
+				
+				if(ts.indexOf('-') > -1){
+					ts = ts.replaceAll('-','');
+				}
+				
+				if(ts.indexOf('=') > -1){
+					ts = ts.replaceAll('=','');
+				}
+					
+				$('#tar').val(ts);
+				$('#result').html('완료'+cnt);
+			}
+
+	    </script>
+	</body>
+</html>
