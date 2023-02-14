@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title>JYP</title>
+<meta name="author" content="SK MNS" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width" />
+<link rel="icon" href="data:;base64,iVBORw0KGgo="> <!-- favicon 처리 -->
+<style>
+	#btnab{
+		width : 55px;	
+		height : 55px;
+	}
+</style>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+</head>
+	<body>
+	    <div id="wrap" class="p-msg">
+	      <!-- 본문 -->
+		  <h2>국내/해외 취합</h2>
+	      <section id="contents">
+	        <div class="inner">
+	          <div class="msg-box">
+				<input type="button" id="init" value="초기화" onclick="initData()">
+				<p>저장할 데이터 제목</p>
+				<input type="text" id="exDataTIT">
+				<p>저장할 데이터</p>
+				<textarea id="exData" rows="20" cols="20"></textarea>
+				<input type="button" id="" value="저장" onclick="saveExData()">
+				<p id="dataList"></p>
+
+			  	</br>
+				<p>찾고자 하는 이름</p>
+				<input type="text" id="JYPTEXT">
+	          	<input type="button" id="btnab" value="찾기" onclick="action()">
+	          </div>
+			  <div id="result"></div>
+	        </div>
+	      </section>
+	    </div>
+	    <script type="text/javascript">
+		    $(document).ready(function(){
+				// var sData = prompt("전문을 입력하세요", "");
+				// if(sData == 'aaa' || sData == 'ㅁㅁㅁ' ||sData == 'AAA'){
+				// 	$('#btnab').attr('disabled',false);
+				// } else {
+				// 	$('#btnab').attr('disabled',true);
+				// }
+				getDataList();
+		    });
+
+var str = '';
+let textArr = [];
+
+function saveExData(){
+	var data = $('#exData');
+	var title = $('#exDataTIT');
+	var dataObj = {};
+
+	if($(title).val() == ''){
+		alert('타이틀 입력');
+		$(title).focus();
+		return;
+	} else {
+		for(var i=0; i < textArr.length; i++) {
+			if($(title).val() == textArr[i]['title']) {
+				alert('이미 존재하는 리스트 제목');
+				$(title).focus();
+				return false;
+			}
+		}
+	}
+	
+
+	if($(data).val() == ''){
+		alert("데이터 입력")
+		$(data).focus();
+		return;
+	} 
+
+
+	dataObj.title = $(title).val();
+	dataObj.data = $(data).val();
+	textArr.push(dataObj)
+
+	getDataList();
+}
+
+
+// 현재 저장된 목록 불러오기
+function getDataList() {
+	$('#dataList').text("현재 저장된 목록 : ")
+	var html = '';
+
+	for(var i=0; i < textArr.length; i++) {
+		html = `
+			${textArr[i]['title']}  ,   
+		`;
+		$('#dataList').append(html)
+	}
+}
+
+function initData(){
+	textArr = [];
+	location.reload();
+}
+
+function jypAction() {
+    str = $('#JYPTEXT').val();
+    var _2020JYPE_결과 = solution(_2020JYPE)
+    var _2020외부_결과 = solution(_2020외부)
+  
+    var _2021JYPE_결과 = solution(_2021JYPE)
+    var _2021외부_결과 = solution(_2021외부)
+  
+    var _2022JYPE_결과 = solution(_2022JYPE)
+    var _2022외부_결과 = solution(_2022외부)
+
+    console.log("_2020JYPE_결과 : ", _2020JYPE_결과, " _2020외부_결과 : ", _2020외부_결과);
+    console.log("_2021JYPE_결과 : ", _2021JYPE_결과, " _2021외부_결과 : ", _2021외부_결과);
+    console.log("_2022JYPE_결과 : ", _2022JYPE_결과, " _2022외부_결과 : ", _2022외부_결과);
+
+
+    console.log("합 계 : ", (_2020JYPE_결과 +_2020외부_결과 +_2021JYPE_결과+ _2021외부_결과+_2022JYPE_결과 + _2022외부_결과) );
+}
+
+function action(){
+	if(textArr.length == 0) {
+		return;
+	}
+
+	if($('#JYPTEXT').val() == ''){
+		alert('이름 입력')
+		$('#JYPTEXT').focus();
+		return;
+	}
+	
+	str = $('#JYPTEXT').val();
+	
+	var cnt = 0;
+
+	for(var i=0; i < textArr.length; i++) {
+		var title = textArr[i]['title'];
+		var data = textArr[i]['data'];
+		
+		var re = solution(data);
+		
+		console.log(`${title} : ` + re)
+		cnt = cnt + re;
+	}
+	console.log('합계 : ', cnt)
+}
+
+
+
+
+
+function solution(s){
+    let answer=0;
+    // let str = '이해솔';
+    let pos=s.indexOf(str);
+
+    while(pos!==-1){ // indexOf()가 -1면 찾지 못한것이므로 특정문자 찾았을때 반복문
+
+      answer++; // 찾으면 카운팅
+      pos=s.indexOf(str, pos+1); // pos 첫번째 찾은 그 위치 뒷편부터 찾아라
+    }
+    return answer;
+  }
+
+
+	    </script>
+	</body>
+</html>
