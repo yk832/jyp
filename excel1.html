@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<title>JYP</title>
+<meta name="author" content="SK MNS" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width" />
+<link rel="icon" href="data:;base64,iVBORw0KGgo="> <!-- favicon 처리 -->
+<style>
+	#btnab{
+		width : 55px;	
+		height : 55px;
+	}
+</style>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+</head>
+	<body>
+	    <div id="wrap" class="p-msg">
+	      <!-- 본문 -->
+	      <section id="contents">
+	        <div class="inner">
+	          <div class="msg-box">
+	          	<textarea id="tar" rows="40" cols="40"></textarea>
+	          	<input type="button" id="btnab" value="확인" onclick="jypAction()">
+	          </div>
+			  <div id="result"></div>
+	        </div>
+	      </section>
+	    </div>
+	    <script type="text/javascript">
+		    $(document).ready(function(){
+				var sData = prompt("전문을 입력하세요", "");
+				if(sData == 'aaa' || sData == 'ㅁㅁㅁ' ||sData == 'AAA'){
+					$('#btnab').attr('disabled',false);
+				} else {
+					$('#btnab').attr('disabled',true);
+				}
+		    });
+
+
+
+
+
+
+
+			var _2020JYPE = `
+아르마딜로, 방찬 (3RACHA), 창빈 (3RACHA), 한 (3RACHA)
+창빈 (3RACHA)
+J.Y. Park "The Asiansoul"
+홍지상, Jae, 원필, Young K
+아르마딜로, 방찬 (3RACHA), 창빈 (3RACHA), 한 (3RACHA)
+J.Y. Park "The Asiansoul", 이해솔
+베르사최, JUN. K
+J.Y. Park "The Asiansoul", 이해솔
+J.Y. Park "The Asiansoul", Kobee
+홍지상, 원필, Young K
+HotSauce, 방찬 (3RACHA), 창빈 (3RACHA), 한 (3RACHA)
+J.Y. Park "The Asiansoul", 심은지
+J.Y. Park "The Asiansoul", 이해솔, 방찬 (3RACHA), 창빈 (3RACHA), 한 (3RACHA)
+J.Y. Park "The Asiansoul", JUN. K
+J.Y. Park "The Asiansoul"
+방찬 (3RACHA), 창빈 (3RACHA), 한 (3RACHA)
+J.Y. Park "The Asiansoul", 홍지상, 방찬 (3RACHA), 창빈 (3RACHA), 한 (3RACHA)
+이우민
+J.Y. Park "The Asiansoul", 이해솔
+J.Y. Park "The Asiansoul", 이해솔
+J.Y. Park "The Asiansoul", 이해솔, 방찬 (3RACHA), 창빈 (3RACHA), 한 (3RACHA)
+베르사최, 방찬 (3RACHA), 창빈 (3RACHA), 한 (3RACHA)
+`;
+
+
+var _2020외부 = `
+심은지
+아르마딜로
+Kobee
+아르마딜로
+이우민
+이우민
+심은지, 유빈
+가든
+가든
+베르사최
+홍지상, 방찬, 창빈, 한 (3RACHA)
+심은지
+심은지
+Young K
+HotSauce
+이우민
+김승수
+김승수
+김승수
+꿀단지
+Young K
+베르사최
+김승수
+유빈
+아르마딜로
+꿀단지
+이우민
+홍지상, J.Y. Park "The Asiansoul"
+김승수
+베르사최
+`;
+
+var _2021JYPE = `
+홍지상, Young K, 원필
+J.Y. Park "The Asiansoul", 김승수
+홍지상, Young K., 원필
+J.Y. Park "The Asiansoul", KASS, 이해솔
+J.Y. Park "The Asiansoul", 이해솔
+KOBEE, Holy M, 방찬 (3RACHA), 창빈 (3RACHA), 한 (3RACHA)
+장우영, HotSauce
+홍지상, Young K., 원필
+HotSauce, 방찬 (3RACHA), 창빈 (3RACHA), 한 (3RACHA)
+홍지상, Young K.
+홍지상, Young K.
+도운
+심은지
+아르마딜로, 버나드 박
+HotSauce, 방찬 (3RACHA), 창빈 (3RACHA), 한 (3RACHA)
+한 (3RACHA)
+심은지, 이해솔, 가온, 정수
+아르마딜로, 방찬 (3RACHA), 창빈 (3RACHA), 한 (3RACHA), 베르사최
+KASS, Kobee
+J.Y. Park "The Asiansoul", KOBEE
+이우민
+J.Y. Park “The Asiansoul”, 심은지, Trippy
+J.Y. Park “The Asiansoul”
+J.Y. Park "The Asiansoul", KASS, 이해솔
+KASS 
+Trippy, Anna Timgren
+이우민, LACND
+JUN.K
+방찬 (3RACHA), 창빈 (3RACHA), 한 (3RACHA), 베르사최
+KASS
+RAINSTONE
+`;
+
+var _2021외부 = `
+KASS
+Dr.JO, 유빈
+꿀단지
+Trippy
+꿀단지
+Dr.JO
+Young K
+아르마딜로, Peridot
+김승수
+이우민, 이해솔
+이우민
+KASS
+GARDEN
+J.Y. Park "The Asiansoul", 홍지상, 이우민
+이해솔
+심은지
+베르사최
+eaJ
+창빈 (3RACHA)
+아르마딜로
+`;
+
+var _2022JYPE =`
+홍지상, 원필, Young K
+베르사최, 방찬 (3RACHA), 창빈 (3RACHA), 한 (3RACHA)
+심은지, 이해솔, 정수, O.de, 준한
+방찬 (3RACHA), 창빈 (3RACHA), 한 (3RACHA), 베르사최
+이우민
+홍지상, 버나드박
+아르마딜로
+방찬 (3RACHA), 창빈 (3RACHA), 한 (3RACHA)
+심은지, 이해솔, 건일, 정수, 가온, O.de, 준한, 주연
+J. Y. Park "The Asiansoul", 이해솔
+방찬 (3RACHA), 창빈 (3RACHA), 한 (3RACHA), 베르사최
+이우민
+SELAH
+방찬 (3RACHA), 창빈 (3RACHA), 한 (3RACHA)
+Trippy
+J.Y. Park "The Asiansoul", TWICE, 이우민
+GARDEN
+심은지
+`;
+
+var _2022외부 =`
+이우민, 이해솔
+이우민
+아르마딜로, 김은수
+이해솔
+SELAH
+꿀단지
+아르마딜로
+이우민
+HotSauce, 김은수, SELAH, Tommy Park
+이해솔
+SELAH
+꿀단지
+GARDEN
+KASS
+꿀단지
+HotSauce 
+이우민
+방찬 (3RACHA), 창빈 (3RACHA), 한 (3RACHA)
+GARDEN
+Trippy, 방찬 (3RACHA), 창빈 (3RACHA), 한 (3RACHA)
+`;
+
+
+
+var _2020JYPE_P = `
+아르마딜로, 방찬 (3RACHA)
+
+J.Y. Park "The Asiansoul"
+홍지상
+아르마딜로, 방찬 (3RACHA)
+이해솔
+베르사최
+J.Y. Park "The Asiansoul", 이해솔
+J.Y. Park "The Asiansoul", Kobee
+홍지상
+HotSauce, 방찬 (3RACHA)
+
+J.Y. Park "The Asiansoul", 이해솔
+방찬 (3RACHA)
+홍지상
+이우민
+J.Y. Park "The Asiansoul", 이해솔
+J.Y. Park "The Asiansoul", 이해솔
+J.Y. Park "The Asiansoul", 이해솔
+베르사최, 방찬 (3RACHA)
+`;
+
+var _2020외부_P = `
+심은지
+아르마딜로
+Kobee
+아르마딜로
+이우민
+이우민
+심은지
+가든
+가든
+베르사최
+홍지상
+심은지
+심은지
+
+HotSauce
+이우민
+김승수
+김승수
+김승수
+꿀단지
+
+베르사최
+김승수
+
+아르마딜로
+꿀단지
+이우민
+홍지상, J.Y. Park "The Asiansoul"
+김승수
+베르사최
+`;
+
+
+var _2021JYPE_P = `
+홍지상
+J.Y. Park "The Asiansoul", 김승수
+홍지상
+J.Y. Park "The Asiansoul", 이해솔
+J.Y. Park "The Asiansoul", 이해솔
+KOBEE, Holy M
+HotSauce
+홍지상
+HotSauce, 방찬 (3RACHA)
+홍지상
+홍지상
+
+
+아르마딜로
+HotSauce, 방찬 (3RACHA)
+
+이해솔, 심은지
+방찬 (3RACHA), 베르사최
+Kobee
+J.Y. Park "The Asiansoul", KOBEE
+이우민
+Trippy
+
+J.Y. Park "The Asiansoul" 이해솔
+KASS 
+Trippy
+이우민, LACND
+
+방찬 (3RACHA), 베르사최
+KASS
+RAINSTONE
+
+`;
+
+var _2021외부_P = `
+
+Dr.JO
+꿀단지
+Trippy
+
+
+
+아르마딜로
+김승수
+이우민, 이해솔
+이우민
+KASS
+GARDEN
+홍지상, 이우민
+이해솔
+심은지
+베르사최
+eaJ
+
+아르마딜로
+
+`;
+
+
+var _2022JYPE_P = `
+홍지상
+베르사최, 방찬 (3RACHA)
+이해솔
+베르사최, 방찬 (3RACHA)
+이우민
+홍지상
+아르마딜로
+방찬 (3RACHA)
+이해솔
+J. Y. Park "The Asiansoul", 이해솔
+베르사최
+이우민
+SELAH
+방찬 (3RACHA)
+Trippy
+이우민
+GARDEN
+심은지
+
+`;
+
+var _2022외부_P = `
+이우민, 이해솔
+이우민
+아르마딜로
+이해솔
+SELAH
+꿀단지
+아르마딜로
+이우민
+Tommy Park
+이해솔
+SELAH
+
+GARDEN
+
+꿀단지
+HotSauce 
+이우민
+
+GARDEN
+Trippy, 방찬 (3RACHA)
+`;
+
+var str = '';
+
+
+function jypAction() {
+    str = $('#JYPTEXT').val();
+    var _2020JYPE_결과 = solution(_2020JYPE)
+    var _2020외부_결과 = solution(_2020외부)
+  
+    var _2021JYPE_결과 = solution(_2021JYPE)
+    var _2021외부_결과 = solution(_2021외부)
+  
+    var _2022JYPE_결과 = solution(_2022JYPE)
+    var _2022외부_결과 = solution(_2022외부)
+
+    console.log("_2020JYPE_결과 : ", _2020JYPE_결과, " _2020외부_결과 : ", _2020외부_결과);
+    console.log("_2021JYPE_결과 : ", _2021JYPE_결과, " _2021외부_결과 : ", _2021외부_결과);
+    console.log("_2022JYPE_결과 : ", _2022JYPE_결과, " _2022외부_결과 : ", _2022외부_결과);
+
+
+    console.log("합 계 : ", (_2020JYPE_결과 +_2020외부_결과 +_2021JYPE_결과+ _2021외부_결과+_2022JYPE_결과 + _2022외부_결과) );
+}
+
+function solution(s){
+    let answer=0;
+    // let str = '이해솔';
+    let pos=s.indexOf(str);
+
+    while(pos!==-1){ // indexOf()가 -1면 찾지 못한것이므로 특정문자 찾았을때 반복문
+
+      answer++; // 찾으면 카운팅
+      pos=s.indexOf(str, pos+1); // pos 첫번째 찾은 그 위치 뒷편부터 찾아라
+    }
+    return answer;
+  }
+
+
+	    </script>
+	</body>
+</html>
